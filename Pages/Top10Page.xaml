@@ -1,0 +1,88 @@
+<ContentPage
+    x:Class="TopMusic.Pages.Top10Page"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:TopMusic.PageModels">
+
+    <ContentPage.BindingContext>
+        <vm:Top10PageModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="10,0">
+
+                <!--  TITULO  -->
+                <Label
+                    Margin="10"
+                    FontFamily="KanitMediumItalic"
+                    FontSize="32"
+                    HorizontalOptions="Center"
+                    Text="Top 10 de Artistas"
+                    TextColor="{AppThemeBinding Light={StaticResource LightMode},
+                                                Dark={StaticResource DarkMode}}" />
+
+                <!--  LISTA  -->
+                <CollectionView ItemsSource="{Binding Artists}" SelectionMode="None">
+
+                    <CollectionView.ItemTemplate Padding="10">
+                        <DataTemplate>
+                            <Frame
+                                Margin="0,5"
+                                Padding="10"
+                                BorderColor="Gray"
+                                CornerRadius="10"
+                                HasShadow="True"
+                                InputTransparent="False">
+
+                                <!--  Hace que la tarjeta sirva como botón  -->
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:Top10PageModel}}, Path=SelectArtistCommand}" CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+
+                                <Grid ColumnDefinitions="Auto, Auto, *" VerticalOptions="Center">
+                                    <!--  RANKING  -->
+                                    <Label
+                                        Grid.Column="2"
+                                        Padding="10"
+                                        FontAttributes="Bold"
+                                        FontSize="24"
+                                        HorizontalOptions="End"
+                                        Text="{Binding Ranking}"
+                                        VerticalOptions="Center" />
+
+                                    <!--  FOTO  -->
+                                    <Image
+                                        Grid.Column="0"
+                                        Aspect="AspectFill"
+                                        HeightRequest="80"
+                                        HorizontalOptions="Center"
+                                        Source="{Binding ArtistImg}"
+                                        VerticalOptions="Center"
+                                        WidthRequest="80" />
+
+                                    <!--  INFO  -->
+                                    <StackLayout Grid.Column="1" Padding="10,0">
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="20"
+                                            Text="{Binding Name}"
+                                            TextColor="{AppThemeBinding Light={StaticResource LightMode},
+                                                                        Dark={StaticResource DarkMode}}" />
+                                        <Label
+                                            FontSize="14"
+                                            Text="Último álbum:"
+                                            TextColor="Gray" />
+                                        <Label FontSize="16" Text="{Binding Album}" />
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

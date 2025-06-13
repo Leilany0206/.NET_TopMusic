@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TopMusic.Pages.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:TopMusic.Models"
+    xmlns:pullToRefresh="clr-namespace:Syncfusion.Maui.Toolkit.PullToRefresh;assembly=Syncfusion.Maui.Toolkit"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:TopMusic.PageModels"
+    Title="">
+
+    <ContentPage.BindingContext>
+        <vm:MainPageModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout
+            Padding="30"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+
+            <!--  TITULO INICIO  -->
+            <Label
+                Margin="0,0,0,20"
+                FontAttributes="Bold"
+                FontFamily="KanitMediumItalic"
+                FontSize="36"
+                HorizontalOptions="Center"
+                LineHeight="0.5"
+                Text="Top 10&#x0a;Artistas"
+                TextColor= "{AppThemeBinding Light={StaticResource LightMode},
+                                            Dark={StaticResource DarkMode}}" />
+
+            <!--  IMAGEN RANDOM  -->
+            <Image
+                Margin="0,0,0,20"
+                Aspect="AspectFit"
+                HeightRequest="200"
+                Source="{Binding RandomImageSource}" />
+
+            <Label Text="{Binding DebugText}" TextColor="Red" />
+
+            <!--  BOTÓN INICIO  -->
+            <Button
+                Padding="15,10"
+                BackgroundColor= "{AppThemeBinding Light={StaticResource LightMode},
+                                            Dark={StaticResource DarkMode}}"
+                Command="{Binding StartCommand}"
+                CornerRadius="15"
+                FontFamily="KanitMedium"
+                FontSize="24"
+                HorizontalOptions="Center"
+                Text="INICIAR"
+                TextColor="DimGray"
+                WidthRequest="200" />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
